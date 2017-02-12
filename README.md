@@ -1,2 +1,2 @@
 # arduino
-arduino sketches
+library of arduino sketches
