@@ -1,5 +1,19 @@
 /* sketch for Roo's RGB tree
- *  
+ *
+ * This arduino sketch is for a twisted wire tree - with a 3mm led at the end of each branch, and an RGB led in the heart 
+ * of the tree.  There are 24 3mm leds (branches) of different colours (r, b, g, y).  The branch leds are driven by 3 shift 
+ * registers (3 shift registers * 8 output pins = 24 leds driven by 3 arduino output pins)
+ *
+ * This sketch does two interesting things:
+ *  1 - transitions the RGB led smoothly from one random colour to another using a simple linear algorithm - you could force
+ *      the RGB led periodically to specific colours if you wish (eg the code as-is does not seem to randomly pick yellow)
+ *
+ *  2 - randomly turns the 24 branch leds on and off - while the RGB is transitioning (which is why I'm keeping track of the 
+ *      steps of the RGB transition - eg stepVal, lastStep, stepsBeforeLedChange variables).  
+ *      I wanted the branch leds on more than they are off but wanted some randomness so probabilityOfTurningOnLed variable
+ *      controls the chance that any given led will be turned on each cycle.  Just reduce this value if you them off more of 
+ *      the time
+ * 
  *  pinout:
  *  8 - shift - data in
  *  9 - RGB - 
